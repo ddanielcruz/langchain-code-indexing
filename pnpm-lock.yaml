@@ -14,9 +14,12 @@ dependencies:
   env-var:
     specifier: ^7.3.1
     version: 7.3.1
+  ignore:
+    specifier: ^5.2.4
+    version: 5.2.4
   langchain:
     specifier: ^0.0.112
-    version: 0.0.112
+    version: 0.0.112(ignore@5.2.4)
   winston:
     specifier: ^3.10.0
     version: 3.10.0
@@ -638,6 +641,11 @@ packages:
       ms: 2.1.3
     dev: false
 
+  /ignore@5.2.4:
+    resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
+    engines: {node: '>= 4'}
+    dev: false
+
   /inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
     dev: false
@@ -681,7 +689,7 @@ packages:
     resolution: {integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==}
     dev: false
 
-  /langchain@0.0.112:
+  /langchain@0.0.112(ignore@5.2.4):
     resolution: {integrity: sha512-RWx/PepDayyMZipEh3UUeKjXiQpYjmErpRqw9ZbJr+5vUk1zSwuYW9SP8vRB5celY87QKzhbj5DgypcFytmYuA==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -865,6 +873,7 @@ packages:
       decamelize: 1.2.0
       expr-eval: 2.0.2
       flat: 5.0.2
+      ignore: 5.2.4
       js-tiktoken: 1.0.7
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
