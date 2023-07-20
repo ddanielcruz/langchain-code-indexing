@@ -16,3 +16,7 @@ export async function writeFile(path: string, data: string): Promise<void> {
 export async function readFile(path: string) {
   return await fs.readFile(path, { encoding: 'utf-8' })
 }
+
+export async function createDirectory(path: string) {
+  return await fs.mkdir(path)
+}

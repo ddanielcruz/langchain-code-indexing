@@ -3,11 +3,13 @@ import path from 'node:path'
 import chalk from 'chalk'
 import { GithubRepoLoader } from 'langchain/document_loaders/web/github'
 import type { Document } from 'langchain/document'
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
+import { FaissStore } from 'langchain/vectorstores/faiss'
 
 import { GH_REPOSITORY, GH_BRANCH, GH_ACCESS_TOKEN } from './config/env.js'
 import { logger } from './config/logger.js'
 import { fileExtensionToLanguage, splitters } from './config/splitters.js'
-import { fileExists, readFile, writeFile } from './helpers/fs.js'
+import { createDirectory, fileExists, readFile, writeFile } from './helpers/fs.js'
 
 type CodeDocument = Document<{ source: string }>
 
@@ -44,4 +46,27 @@ export async function splitDocument(doc: CodeDocument) {
 
   const chunks = await splitter.splitDocuments([doc])
   return chunks as CodeDocument[]
+}
+
+export async function createVectorStore(docs: CodeDocument[]) {
+  const embeddings = new OpenAIEmbeddings({ maxConcurrency: 10 })
+
+  // Check if vector store already exists
+  const directoryName = GH_REPOSITORY.split('/').join('-')
+  const directory = `data/${directoryName}`
+
+  // Reuse computed vector store
+  if (await fileExists(directory)) {
+    logger.info(`Vector store already exists, loading from ${chalk.green(directory)}`)
+    return await FaissStore.load(directory, embeddings)
+  } else {
+    await createDirectory(directory)
+  }
+
+  // Compute vector store and save it to disk
+  logger.info(`Computing vector store, saving to ${chalk.green(directory)}`)
+  const vectorStore = await FaissStore.fromDocuments(docs, embeddings)
+  await vectorStore.save(directory)
+
+  return vectorStore
 }
