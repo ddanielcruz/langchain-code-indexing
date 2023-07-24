@@ -33,8 +33,8 @@ export const fileExtensionToLanguage: Record<string, SupportedTextSplitterLangua
 }
 
 const splitterOptions: Partial<RecursiveCharacterTextSplitterParams> = {
-  chunkSize: 256,
-  chunkOverlap: 32
+  chunkSize: 512,
+  chunkOverlap: 64
 }
 
 export const splitters: Record<SplitterLanguage, RecursiveCharacterTextSplitter> = initializeSplitters()

@@ -18,14 +18,14 @@ const store = await loadVectorStore()
 const { chain } = createConversationChain(store)
 
 // Process received input/question
-// TODO Add loading state
-async function handleInput(query: string) {
+async function handleInput(input: string) {
   // Ask question to the conversation chain with the top 5 results
-  const { text } = await chain.call({ query })
-  console.log(chalk.magenta('[Bot] '), text?.trim(), '\n')
+  process.stdout.write(chalk.magenta('[Bot]  '))
+  await chain.call({ question: input })
+  console.log()
 
   // Let the user ask a new question
-  rl.question(chalk.blueBright('[User] '), handleInput)
+  rl.question(chalk.blueBright('\n[User] '), handleInput)
 }
 
 // Start messaging loop

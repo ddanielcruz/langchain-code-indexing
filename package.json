@@ -7,7 +7,7 @@
     "node": "18"
   },
   "scripts": {
-    "start": "tsx src/main.ts",
+    "start:chat": "tsx src/chat.ts",
     "setup": "tsx src/setup.ts"
   },
   "dependencies": {
