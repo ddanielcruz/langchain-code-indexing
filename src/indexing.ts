@@ -70,3 +70,15 @@ export async function createVectorStore(docs: CodeDocument[]) {
 
   return vectorStore
 }
+
+export async function loadVectorStore() {
+  const directoryName = GH_REPOSITORY.split('/').join('-')
+  const directory = `data/${directoryName}`
+
+  if (await fileExists(directory)) {
+    const embeddings = new OpenAIEmbeddings({ maxConcurrency: 10 })
+    return await FaissStore.load(directory, embeddings)
+  }
+
+  throw new Error('Repository is not configured yet!')
+}

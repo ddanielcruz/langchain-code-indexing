@@ -1,7 +1,7 @@
 import { transports, createLogger, format } from 'winston'
 
 export const logger = createLogger({
-  level: 'debug',
+  level: process.env.LOG_LEVEL || 'info',
   transports: [new transports.Console()],
   format: format.combine(
     format.colorize(),
