@@ -16,9 +16,7 @@ logger.info(`Split ${chalk.green(chunks.length)} chunks from ${chalk.green(docs.
 
 // Initialize Faiss vector store
 logger.info(`Initializing Faiss vector store with ${chalk.green(chunks.length)} chunks`)
-const store = await createVectorStore(chunks)
+await createVectorStore(chunks)
 logger.info('Successfully initialized vector store')
 
-// Perform similarity search
-const result = await store.similaritySearch('What database we use?', 5)
-console.log(result)
+logger.info('Your repository is now ready to use! 🎉')

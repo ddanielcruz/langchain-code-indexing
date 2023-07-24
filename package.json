@@ -7,7 +7,7 @@
     "node": "18"
   },
   "scripts": {
-    "dev": "tsx src/index.ts"
+    "setup": "tsx src/setup.ts"
   },
   "dependencies": {
     "chalk": "^5.3.0",
