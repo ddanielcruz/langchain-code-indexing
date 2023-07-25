@@ -16,7 +16,10 @@ export function createConversationChain(store: VectorStore) {
     ]
   })
 
-  const chain = RetrievalQAChain.fromLLM(model, store.asRetriever(), { inputKey: 'question' })
+  const chain = RetrievalQAChain.fromLLM(model, store.asRetriever(), {
+    inputKey: 'question',
+    returnSourceDocuments: true
+  })
 
   return { model, chain }
 }
